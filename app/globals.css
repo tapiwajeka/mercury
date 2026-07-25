@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mercuryBlack: #17181a;
+  --color-mercuryDark: #1f2125;
+  --color-mercurySurface: #26282d;
+  --color-mercuryGray: #6b6d73;
+  --color-mercurySilver: #c7c9ce;
+  --color-mercuryWhite: #f5f5f7;
+  --color-mercuryAccent: #4c8dff;
+  --font-sans: var(--font-manrope), system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+  --font-display: var(--font-grotesk), var(--font-manrope), system-ui, sans-serif;
+}
+
+:root {
+  --background: #17181a;
+  --foreground: #f5f5f7;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes slideUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes blobDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, -6%) scale(1.08); }
+  66% { transform: translate(-3%, 4%) scale(0.95); }
+}
+@keyframes ringPulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  70%, 100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes kenBurns {
+  0% { transform: scale(1.05) translate(0%, 0%); }
+  50% { transform: scale(1.14) translate(-1.5%, -1%); }
+  100% { transform: scale(1.05) translate(0%, 0%); }
+}
+
+/* ---------- Animation utilities ---------- */
+.animate-fade-in { animation: fadeIn 0.8s ease-out; }
+.animate-slide-up { animation: slideUp 0.6s ease-out both; }
+.animate-float { animation: floatAnim 6s ease-in-out infinite; }
+.animate-spin-slow { animation: spin 1s linear infinite; }
+.animate-blob { animation: blobDrift 14s ease-in-out infinite; }
+.animate-ring-pulse { animation: ringPulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.animate-kenburns { animation: kenBurns 24s ease-in-out infinite; }
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ---------- Metallic silver gradient text ---------- */
+.text-metallic {
+  background: linear-gradient(135deg, #6b6d73, #f5f5f7, #c7c9ce, #f5f5f7, #6b6d73);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+.text-gradient-animated {
+  background: linear-gradient(90deg, #c7c9ce, #f5f5f7, #6b6d73, #c7c9ce);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientFlow 4s ease infinite;
+}
+
+/* ---------- Buttons ---------- */
+.btn-premium {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.btn-premium:hover { transform: translateY(-2px); }
+.btn-primary {
+  background: linear-gradient(135deg, silver, gray);
+  color: #000;
+}
+.btn-primary:hover {
+  box-shadow: 0 10px 30px -10px rgba(192, 192, 192, 0.6);
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(192, 192, 192, 0.5);
+  color: silver;
+}
+.btn-outline:hover {
+  background: rgba(192, 192, 192, 0.1);
+  border-color: rgba(192, 192, 192, 0.9);
+}
+
+/* ---------- Misc ---------- */
+.shimmer { position: relative; overflow: hidden; }
+
+.glass-card {
+  background: linear-gradient(135deg, #ffffff0d, #ffffff05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.grid-lines {
+  background-image: linear-gradient(rgba(192, 192, 192, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(192, 192, 192, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Mercury chevron line-work as a dark-section texture.
+   Source asset is light lines on white; invert() flips the white field to
+   black so a screen blend drops it out entirely, leaving only faint silver
+   chevrons. A radial mask fades the tracery before it reaches the content. */
+.mercury-pattern {
+  background-image: url("/assets/mercury-pattern.webp");
+  background-repeat: repeat;
+  background-position: center top;
+  background-size: 560px auto;
+  filter: invert(1) brightness(1.7) contrast(1.05);
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(
+    130% 105% at 50% 22%,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 42%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    130% 105% at 50% 22%,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 42%,
+    transparent 82%
+  );
+  animation: mercury-pattern-drift 60s linear infinite;
+}
+
+/* Shift by exactly one tile height so the loop is seamless. */
+@keyframes mercury-pattern-drift {
+  from {
+    background-position: center 0;
+  }
+  to {
+    background-position: center 560px;
+  }
+}
+
+/* Variant: chevrons gather from the bottom and dissolve upward — a closing
+   crescendo for the foot of a page / CTA. */
+.mercury-pattern--rise {
+  -webkit-mask-image: radial-gradient(
+    130% 105% at 50% 100%,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 42%,
+    transparent 82%
+  );
+  mask-image: radial-gradient(
+    130% 105% at 50% 100%,
+    #000 0%,
+    rgba(0, 0, 0, 0.85) 42%,
+    transparent 82%
+  );
+  animation-name: mercury-pattern-rise;
+}
+
+@keyframes mercury-pattern-rise {
+  from {
+    background-position: center 560px;
+  }
+  to {
+    background-position: center 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mercury-pattern {
+    animation: none;
+  }
+}
+
+.input-premium {
+  background: #ffffff08;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  color: #e5e5e5;
+  transition: all 0.3s ease;
+}
+.input-premium:focus {
+  outline: none;
+  border-color: #c0c0c080;
+  box-shadow: 0 0 0 3px #c0c0c01a;
+  background: #ffffff0d;
+}
+.input-premium::placeholder {
+  color: #e5e5e566;
+}
+.input-premium-accent:focus {
+  border-color: rgba(76, 141, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(76, 141, 255, 0.12);
+  background: #ffffff0d;
+}
+
+html { scroll-behavior: smooth; }
