@@ -1,5 +1,8 @@
+import Script from "next/script";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-4TEX6VWDPC";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -37,6 +40,20 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-mercuryBlack text-white antialiased">
         {children}
+
+        {/* Google Analytics (gtag.js) — loads on every page */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );
