@@ -22,13 +22,6 @@ export const metadata = {
   title: "Mercury Zimbabwe",
   description:
     "High-performance ICT devices engineered for Africa, built to international standards. Locally assembled with global quality.",
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "32x32" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
 };
 
 export const viewport = {
